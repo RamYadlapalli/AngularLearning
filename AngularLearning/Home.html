@@ -5,7 +5,9 @@
     <title>Home</title>
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/angular-sanitize.min.js"></script>
-
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
   <style>
       [ng\:cloak], [ng-cloak], .ng-cloak {
           display: none !important;
@@ -14,17 +16,46 @@
 
 </head>
 <body ng-app="MyApp" ng-cloak>
+    <h1 class="page-header text-center">Angular Learning</h1>
     <div ng-controller="HomeController" class="container">
-        <span> {{Name}} {{Date}}</span>
-        <div ng-repeat="session in Sessions" class="row">
-            <span>{{session.Name}}</span>
-            <span>{{session.Type}}</span>
-            <input type="button" value="{{session.VoteCount}}" name="votingButton" ng-click="upVote(session)"/>
-            <input type="checkbox" ng-change="changeCB(sesison)" name="votingCheck" ng-model="checked" />
+        <div class="well row">
+            <h3> {{Name | uppercase}} </h3>
+            <div>{{ Date | date:medium}}</div>
+            <h4>Sessions</h4>
+            Order By:
+            <select ng-model="sortOrder" class="input-sm">
+                <option value="Name">Name</option>
+                <option value="VoteCount">Vote Count</option>
+            </select>
+            Show : 
+            <select ng-model="query.Level" class="input-sm">
+                <option value="">All</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Expert">Expert</option>
+            </select>
+            Items to Show: 
+            <input type="number" name="countBox" ng-model="resultsLimit" class="input-sm"/>
+            <div ng-repeat="session in Sessions | orderBy:sortOrder | limitTo:resultsLimit | filter:query" class="row thumbnail">
+                <div><strong>Session Name </strong>{{session.Name}}</div>
+                <div><strong>Session Type </strong>{{session.Type}}</div>
+                <div class=""> <strong>Vote Count: </strong><input type="button" value="{{session.VoteCount}}" name="votingButton" ng-click="upVote(session)" /></div>
+                <!--<input type="checkbox" ng-change="changeCB(sesison)" name="votingCheck" ng-model="checked" />-->
+                <div><strong>Price:</strong>{{3450 | currency}}</div>
+                <div><strong>Level: </strong>{{session.Level}}</div>
+                <div><strong>Duration: </strong>{{session.Duration | addHours}}</div>
+
+            </div>
         </div>
         <div ng-bind-html="snippet">Test</div>
         <div ng-show="boolVal">Show this </div>
         <div ng-hide="boolVal">Hide this </div>
+        <input type="button" value="Disabled button" ng-disabled="buttonDisabled"/>
+        <div>{{1+2}}</div>
+        <div ng-non-bindable>{{1+2}}</div>
+        <div>{{ 22.3545434534 |number:2 }}</div>
+
+        <div>{{ {a:"test",b:"3"} |json }}</div> //helpful while debugging 
     </div>
     <script src="JS/App.js"></script>
 </body>
