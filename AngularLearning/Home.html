@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Home</title>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-sanitize.min.js"></script>
+
+  <style>
+      [ng\:cloak], [ng-cloak], .ng-cloak {
+          display: none !important;
+      }
+  </style>
+
+</head>
+<body ng-app="MyApp" ng-cloak>
+    <div ng-controller="HomeController" class="container">
+        <span> {{Name}} {{Date}}</span>
+        <div ng-repeat="session in Sessions" class="row">
+            <span>{{session.Name}}</span>
+            <span>{{session.Type}}</span>
+            <input type="button" value="{{session.VoteCount}}" name="votingButton" ng-click="upVote(session)"/>
+            <input type="checkbox" ng-change="changeCB(sesison)" name="votingCheck" ng-model="checked" />
+        </div>
+        <div ng-bind-html="snippet">Test</div>
+        <div ng-show="boolVal">Show this </div>
+        <div ng-hide="boolVal">Hide this </div>
+    </div>
+    <script src="JS/App.js"></script>
+</body>
+</html>
