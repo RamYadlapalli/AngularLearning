@@ -884,6 +884,7 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Services\SessionService.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
